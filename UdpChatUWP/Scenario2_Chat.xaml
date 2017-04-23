@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="UdpChatUWP.Scenario2_Chat"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UdpChatUWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ScrollViewer>
+            <RelativePanel>
+                <TextBlock x:Name="nameTextBlock" Text="UserName" FontWeight="Bold" RelativePanel.AlignHorizontalCenterWithPanel="True" />
+                <ListBox x:Name="listBox" ItemsSource="{x:Bind _messages}" RelativePanel.Below="nameTextBlock">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:Message">
+                            <RelativePanel HorizontalAlignment="Stretch">
+                                <TextBlock x:Name="name" Text="{x:Bind UserName}" FontWeight="Bold" Margin="0,0,0,8" RelativePanel.AlignTopWithPanel="True" />
+                                <TextBlock x:Name="text" Text="{x:Bind Text}" RelativePanel.Below="name" />
+                                <TextBlock x:Name="ipAddress" Text="{x:Bind UserIP}" RelativePanel.Below="text" RelativePanel.AlignRightWithPanel="True" />
+                            </RelativePanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <RelativePanel HorizontalAlignment="Stretch" RelativePanel.AlignBottomWithPanel="True" Margin="8" Padding="5"  >
+                    <TextBox x:Name="messageTextBox" RelativePanel.AlignLeftWithPanel="True" RelativePanel.LeftOf="sendButton" KeyUp="messageTextBox_KeyUp" PlaceholderText="Input your message" />
+                    <Button x:Name="sendButton" Content="Send" RelativePanel.AlignRightWithPanel="True" Margin="5,0,0,0" Click="sendButton_Click" />
+                </RelativePanel>
+            </RelativePanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
